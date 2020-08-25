@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FalkirkBinAlert", "FalkirkBinAlert\FalkirkBinAlert.csproj", "{CFFEFB12-7C3C-4B65-8BD4-CD808806804B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFFEFB12-7C3C-4B65-8BD4-CD808806804B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFFEFB12-7C3C-4B65-8BD4-CD808806804B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFFEFB12-7C3C-4B65-8BD4-CD808806804B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFFEFB12-7C3C-4B65-8BD4-CD808806804B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D324D34-6D84-457B-9050-60DECE559054}
+	EndGlobalSection
+EndGlobal
