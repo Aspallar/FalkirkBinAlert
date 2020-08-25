@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:FalkirkBinAlert"
         mc:Ignorable="d"
         Title="Falkirk Bins Settings"
+        Icon="bin.ico"
         Height="280" Width="522"
         ShowMaxRestoreButton="False" ShowMinButton="False"
         WindowStartupLocation="CenterOwner"

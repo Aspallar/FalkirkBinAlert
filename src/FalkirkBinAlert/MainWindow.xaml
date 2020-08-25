@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:FalkirkBinAlert"
         mc:Ignorable="d"
         Title="Falkirk Bins"
+        Icon="Bin.ico"
         Height="350" Width="189"
         ShowMaxRestoreButton="False"
         Loaded="MetroWindow_Loaded">
