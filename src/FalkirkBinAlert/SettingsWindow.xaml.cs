@@ -26,9 +26,8 @@ namespace FalkirkBinAlert
     /// </summary>
     public partial class SettingsWindow : MetroWindow
     {
-        private WebClient client = null;
+        private FalkirkWebClient client = null;
         private ObservableCollection<UprnAddress> addresses = new ObservableCollection<UprnAddress>();
-        private string originalUprn;
 
         public SettingsWindow()
         {
@@ -39,11 +38,11 @@ namespace FalkirkBinAlert
                 Uprn.Text = uprn;
         }
 
-        private WebClient GetWebClient()
+        private FalkirkWebClient GetWebClient()
         {
             if (client == null)
             {
-                client = new WebClient();
+                client = new FalkirkWebClient();
                 client.DownloadStringCompleted += Client_DownloadStringCompleted;
             }
             return client;
@@ -87,9 +86,7 @@ namespace FalkirkBinAlert
             {
                 addresses.Clear();
                 var client = GetWebClient();
-                var url = "https://www.falkirk.gov.uk/services/bins-rubbish-recycling/household-waste/bin-collection-dates.aspx?postcode=";
-                url += HttpUtility.UrlEncode(PostCode.Text);
-                client.DownloadStringAsync(new Uri(url));
+                client.FetchAddressPageAsync(PostCode.Text);
             }
         }
 

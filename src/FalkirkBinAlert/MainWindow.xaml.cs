@@ -25,7 +25,7 @@ namespace FalkirkBinAlert
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private WebClient client = null;
+        private FalkirkWebClient client = null;
         private DispatcherTimer refreshTimer = new DispatcherTimer();
         private readonly ObservableCollection<BinStatus> binStatus = new ObservableCollection<BinStatus>();
 
@@ -51,15 +51,12 @@ namespace FalkirkBinAlert
             else
             {
                 NoLocation.Visibility = Visibility.Hidden;
-                const string format = "yyyy-MM-dd";
                 refreshTimer.Stop();
-                var now = DateTime.Now.Date;
-                var start = now.ToString(format);
-                var end = now.AddDays(90).ToString(format);
-                var uri = new Uri($"https://www.falkirk.gov.uk/bin-calendar?uprn={uprn}&start={start}&end={end}");
-                client = new WebClient();
+                var start = DateTime.Now.Date;
+                var end = start.AddDays(90);
+                client = new FalkirkWebClient();
                 client.DownloadStringCompleted += Client_DownloadStringCompleted;
-                client.DownloadStringAsync(uri);
+                client.FetchCalendarDataAsync(uprn, start, end);
             }
         }
 
