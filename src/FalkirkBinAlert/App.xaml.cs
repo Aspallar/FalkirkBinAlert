@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using ControlzEx.Theming;
+using System.Net;
 using System.Windows;
 
 namespace FalkirkBinAlert
@@ -13,6 +14,8 @@ namespace FalkirkBinAlert
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.Expect100Continue = true;
             base.OnStartup(e);
+            var settings = FalkirkBinAlert.Properties.Settings.Default;
+            ThemeManager.Current.ChangeTheme(this, settings.Theme);
         }
     }
 }

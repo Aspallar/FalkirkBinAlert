@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
+using ControlzEx.Theming;
 using MahApps.Metro.Controls;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -96,13 +97,20 @@ namespace FalkirkBinAlert
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            var settings = Properties.Settings.Default;
             var uprn = Uprn.Text.Trim();
             if (Regex.IsMatch(uprn, @"^\d+$"))
-            {
-                Properties.Settings.Default.Uprn = uprn;
-                Properties.Settings.Default.Save();
-                DialogResult = true;
-            }
+                settings.Uprn = uprn;
+            settings.Theme = ThemePicker.ThemeName;
+            settings.Save();
+            DialogResult = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            var settings = Properties.Settings.Default;
+            if (settings.Theme != ThemePicker.ThemeName)
+                ThemeManager.Current.ChangeTheme(Application.Current, settings.Theme);
         }
     }
 }

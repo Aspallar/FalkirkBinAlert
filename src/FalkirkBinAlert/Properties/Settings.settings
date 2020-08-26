@@ -5,5 +5,8 @@
     <Setting Name="Uprn" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dark.Blue</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

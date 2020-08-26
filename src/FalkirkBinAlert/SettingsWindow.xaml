@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Falkirk Bins Settings"
         Icon="bin.ico"
-        Height="280" Width="522"
+        Height="353" Width="522"
         ShowMaxRestoreButton="False" ShowMinButton="False"
         WindowStartupLocation="CenterOwner"
         Unloaded="MetroWindow_Unloaded">
@@ -20,7 +20,7 @@
                 <TextBlock x:Name="Uprn" Height="30" Text="" Foreground="LightGreen"
                            Margin="20 0 0 10" FontSize="24" />
             </StackPanel>
-            <TextBlock TextWrapping="Wrap" Margin="0 0 0 20" Foreground="LightGray">
+            <TextBlock TextWrapping="Wrap" Margin="0 0 0 20" Foreground="DarkGray">
                 Your location is specified using the Unique Property Reference Number (UPRN).
                 You can find the UPRN for your property using the controls below.
                 Enter your postcode and click the "Find" button then select your address.
@@ -55,9 +55,13 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
+            
+            <TextBlock Text="Color Theme" FontSize="20" Margin="0 20 0 10"></TextBlock>
+            <local:MetroThemePicker x:Name="ThemePicker"/>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="okButton" Width="60" Content="OK" Margin="0 30 10 0" Click="OkButton_Click"/>
-                <Button Width="60" Content="Cancel" Margin="0 30 0 0" IsCancel="True"/>
+                <Button x:Name="okButton" Width="60" Content="OK" Margin="0 20 10 0" Click="OkButton_Click"/>
+                <Button Width="60" Content="Cancel" Margin="0 20 0 0" IsCancel="True" Click="Cancel_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>
