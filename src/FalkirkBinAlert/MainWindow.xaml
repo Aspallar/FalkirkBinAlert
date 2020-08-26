@@ -35,7 +35,7 @@
                             <TextBlock Grid.Column="0" Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
                                 <TextBlock Text="{Binding When}" />
-                                <TextBlock Text="{Binding Day}" Foreground="Moccasin"/>
+                                <TextBlock Text="{Binding Day}" FontStyle="Italic"/>
                             </StackPanel>
                         </Grid>
                     </Border>
