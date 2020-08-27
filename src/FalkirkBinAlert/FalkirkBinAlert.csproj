@@ -153,5 +153,8 @@
   <ItemGroup>
     <Resource Include="bin.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wheelie-bin.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

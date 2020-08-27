@@ -9,8 +9,9 @@
         mc:Ignorable="d"
         Title="Falkirk Bins"
         Icon="Bin.ico"
-        Height="350" Width="189"
+        Height="418" Width="232"
         ShowMaxRestoreButton="False"
+        SaveWindowPosition="True"
         Loaded="MetroWindow_Loaded">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
@@ -22,41 +23,53 @@
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
     <Grid>
-        <ItemsControl x:Name="BinStatusList" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="0 4">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Rectangle Grid.Column="0" Width="100" Height="40" Fill="{Binding Color}" RadiusX="5" RadiusY="5"/>
-                            <TextBlock Grid.Column="0" Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
-                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
-                                <TextBlock Text="{Binding When}" />
-                                <TextBlock Text="{Binding Day}" FontStyle="Italic"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Border Margin="10 4">
+            <Viewbox Stretch="Uniform">
+                <ItemsControl x:Name="BinStatusList" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="0 4">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Width="100" Height="40" Fill="{Binding Color}" RadiusX="5" RadiusY="5"/>
+                                    <TextBlock Grid.Column="0" Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
+                                        <TextBlock Text="{Binding When}" />
+                                        <TextBlock Text="{Binding Day}" FontStyle="Italic"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+        </Border>
         <StackPanel x:Name="NetworkError" Visibility="Hidden">
-            <TextBlock  TextWrapping="Wrap" Foreground="Red" Margin="10">
-                There was an error obtaining bin data from Falkirk Council.
+            <Border BorderThickness="1" BorderBrush="Red" Margin="10" CornerRadius="10">
+                <TextBlock  TextWrapping="Wrap" Foreground="Red" Margin="10" FontSize="20" TextDecorations="underline">
+                        Uable to obtain bin data from Falkirk Council.
+                </TextBlock>
+            </Border>
+            <TextBlock TextWrapping="Wrap" Margin="10" FontSize="16">
+                    Your internet or the Falkirk Council web servers may be down.
             </TextBlock>
-            <TextBlock TextWrapping="Wrap" Foreground="Red" Margin="10">
-                The application will retry obtaining the bin data automatically.
+            <TextBlock TextWrapping="Wrap" Margin="10" FontSize="16">
+                    I'll try again in a few minutes.
             </TextBlock>
         </StackPanel>
         <StackPanel x:Name="NoLocation" Visibility="Hidden">
-            <TextBlock  TextWrapping="Wrap" Margin="10 10 10 0" Foreground="Red" FontSize="20" FontWeight="Bold">
-                NO LOCATION
-            </TextBlock>
+            <Border BorderThickness="1" BorderBrush="Red" Margin="10" CornerRadius="10" Padding="0 10">
+                <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Red" FontSize="20" FontWeight="Bold">
+                    Where are you?
+                </TextBlock>
+            </Border>
             <TextBlock  TextWrapping="Wrap" Margin="10">
                 No location has been set. Click on the cog icon in the title bar to set your location.
             </TextBlock>
+            <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 40 0 0"/>
         </StackPanel>
     </Grid>
 </mah:MetroWindow>
