@@ -8,5 +8,11 @@
     <Setting Name="Theme" Type="System.String" Scope="User">
       <Value Profile="(Default)">Dark.Blue</Value>
     </Setting>
+    <Setting Name="NagStartTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">18:00:00</Value>
+    </Setting>
+    <Setting Name="NagInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:30:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -13,7 +13,8 @@ namespace FalkirkBinAlert
             Title = title;
             Color = Brush(colorCode);
             Date = date;
-            When = when(date);
+            WhenDays = Days(date);
+            When = when(WhenDays);
             Day = date.ToString("ddd");
         }
 
@@ -23,15 +24,18 @@ namespace FalkirkBinAlert
 
         public DateTime Date { get; }
 
+        public int WhenDays { get; }
+
         public string When { get; }
 
-        public string Day { get; } 
+        public string Day { get; }
 
-        private static string when(DateTime date)
+
+        private static int Days(DateTime date)
+            => (int)(date - DateTime.Now.Date).TotalDays;
+
+        private static string when(int days)
         {
-            var now = DateTime.Now.Date;
-            var days = (date - now).TotalDays;
-
             string when;
             if (days == 0)
                 when = "Today";

@@ -1,0 +1,34 @@
+﻿<mah:MetroWindow x:Class="FalkirkBinAlert.NagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:FalkirkBinAlert"
+        mc:Ignorable="d"
+        Title="AlertWindow"
+        Height="170" Width="472"
+        WindowStyle="None"
+        WindowStartupLocation="Manual"
+        ShowTitleBar="False"
+        ShowCloseButton="False" ShowMinButton="False" ShowMaxRestoreButton="False"
+        Topmost="True"
+        Loaded="MetroWindow_Loaded">
+    <Border Margin="10 0 30 10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 0 10 0"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Put Yer Bins Oot!" FontSize="26" Margin="0 20 0 10"
+                           FontStyle="Italic" FontWeight="Bold" />
+                <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Padding="10 5" FontSize="16"
+                        Content="The bins are oot! stop nagging me" Click="Ok_Click"/>
+                <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Padding="10 5" FontSize="16"
+                        Margin="0 10 0 0" Content="Remind me later" IsCancel="True"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</mah:MetroWindow>

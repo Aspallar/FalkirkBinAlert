@@ -15,9 +15,11 @@ namespace FalkirkBinAlert
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private FalkirkWebClient client = null;
+        private FalkirkWebClient client;
         private DispatcherTimer refreshTimer = new DispatcherTimer();
         private readonly ObservableCollection<BinStatus> binStatus = new ObservableCollection<BinStatus>();
+
+        private DispatcherTimer nagTimer;
 
         public MainWindow()
         {
@@ -61,12 +63,50 @@ namespace FalkirkBinAlert
                 BinStatusList.Visibility = Visibility.Visible;
                 NetworkError.Visibility = Visibility.Hidden;
                 StartRefreshTimer(false);
+                UpdateNagTimer();
             }
             else
             {
                 BinStatusList.Visibility = Visibility.Hidden;
                 NetworkError.Visibility = Visibility.Visible;
                 StartRefreshTimer(true);
+            }
+        }
+
+        private void UpdateNagTimer()
+        {
+            var settings = Properties.Settings.Default;
+            if (binStatus.Any(x => x.WhenDays == 1)) {
+                var nagStart = Properties.Settings.Default.NagStartTime;
+                var now = DateTime.Now.TimeOfDay;
+                var interval = now < nagStart ? nagStart - now : TimeSpan.FromMinutes(2);
+                if (nagTimer == null)
+                {
+                    nagTimer = new DispatcherTimer();
+                    nagTimer.Tick += NagTimer_Tick;
+                }
+                nagTimer.Interval = interval;
+                nagTimer.Start();
+            }
+            else if (nagTimer != null)
+            {
+                nagTimer.Stop();
+                nagTimer = null;
+            }
+        }
+
+        private void NagTimer_Tick(object sender, EventArgs e)
+        {
+            nagTimer.Stop();
+            var dlg = new NagWindow() { Owner = this };
+            if ((bool)dlg.ShowDialog())
+            {
+                nagTimer = null;
+            }
+            else
+            {
+                nagTimer.Interval = Properties.Settings.Default.NagInterval;
+                nagTimer.Start();
             }
         }
 
@@ -84,6 +124,7 @@ namespace FalkirkBinAlert
                     status.Add(new BinStatus(entry.Title, entry.Color, entry.Start));
             }
             binStatus.Clear();
+
             foreach (var bin in status.OrderBy(x => x.Date))
                 binStatus.Add(bin);
         }

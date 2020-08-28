@@ -46,5 +46,29 @@ namespace FalkirkBinAlert.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("18:00:00")]
+        public global::System.TimeSpan NagStartTime {
+            get {
+                return ((global::System.TimeSpan)(this["NagStartTime"]));
+            }
+            set {
+                this["NagStartTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:30:00")]
+        public global::System.TimeSpan NagInterval {
+            get {
+                return ((global::System.TimeSpan)(this["NagInterval"]));
+            }
+            set {
+                this["NagInterval"] = value;
+            }
+        }
     }
 }
