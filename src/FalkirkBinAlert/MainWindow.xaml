@@ -12,7 +12,9 @@
         Height="418" Width="232"
         ShowMaxRestoreButton="False"
         SaveWindowPosition="True"
-        Loaded="MetroWindow_Loaded">
+        Loaded="MetroWindow_Loaded"
+        Closing="MetroWindow_Closing"
+        Closed="MetroWindow_Closed">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Button x:Name="Settings"

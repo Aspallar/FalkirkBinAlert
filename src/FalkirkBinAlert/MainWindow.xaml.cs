@@ -20,6 +20,8 @@ namespace FalkirkBinAlert
         private readonly ObservableCollection<BinStatus> binStatus = new ObservableCollection<BinStatus>();
 
         private DispatcherTimer nagTimer;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private bool running = true;
 
         public MainWindow()
         {
@@ -131,7 +133,10 @@ namespace FalkirkBinAlert
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            InitializeNotifyIcon();
             FetchBinData();
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.Uprn))
+                Visibility = Visibility.Hidden;
         }
 
         private void StartRefreshTimer(bool isRetry)
@@ -158,6 +163,59 @@ namespace FalkirkBinAlert
             {
                 FetchBinData();
             }
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (running)
+            {
+                e.Cancel = true;
+                Visibility = Visibility.Hidden;
+                var settings = Properties.Settings.Default;
+                if (!settings.RunningWarningShown)
+                {
+                    notifyIcon.ShowBalloonTip(6000,
+                        "Falkirk Bins is still running",
+                        "Right click it's icon in the System Tray and choose Exit to terminate. This message will not be shown again.",
+                        System.Windows.Forms.ToolTipIcon.Info);
+                    settings.RunningWarningShown = true;
+                    settings.Save();
+                }
+            }
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            notifyIcon.Dispose();
+        }
+
+        private void InitializeNotifyIcon()
+        {
+            notifyIcon = new System.Windows.Forms.NotifyIcon
+            {
+                Icon = Icon.ToSystemDrawingIcon(),
+                Visible = true,
+                ContextMenu = new System.Windows.Forms.ContextMenu(),
+                Text = "Falkirk Bins",
+            };
+
+            notifyIcon.ContextMenu.MenuItems.Add(new System.Windows.Forms.MenuItem("Show", NotifyIcon_Click));
+            notifyIcon.ContextMenu.MenuItems.Add(new System.Windows.Forms.MenuItem("Exit", NotifyIcon_Exit_Click));
+            notifyIcon.Click += NotifyIcon_Click;
+            notifyIcon.BalloonTipClicked += NotifyIcon_Click;
+        }
+
+        private void NotifyIcon_Exit_Click(object sender, EventArgs e)
+        {
+            running = false;
+            Close();
+        }
+
+        private void NotifyIcon_Click(object sender, EventArgs e)
+        {
+            Visibility = Visibility.Visible;
+            WindowState = WindowState.Normal;
+            Activate();
         }
     }
 }

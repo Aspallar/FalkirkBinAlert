@@ -14,5 +14,8 @@
     <Setting Name="NagInterval" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:30:00</Value>
     </Setting>
+    <Setting Name="RunningWarningShown" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
