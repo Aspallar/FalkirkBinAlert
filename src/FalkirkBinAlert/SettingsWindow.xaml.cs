@@ -2,7 +2,10 @@
 using AngleSharp.Html.Parser;
 using ControlzEx.Theming;
 using MahApps.Metro.Controls;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -18,13 +21,32 @@ namespace FalkirkBinAlert
         private FalkirkWebClient client = null;
         private ObservableCollection<UprnAddress> addresses = new ObservableCollection<UprnAddress>();
 
+        private readonly List<string> nagIntervalText = new List<string>
+        {
+            "15 minutes",
+            "30 minutes",
+            "1 hour",
+            "1.5 hours",
+            "2 hours",
+        };
+        private readonly List<int> nagIntervals = new List<int> { 15, 30, 60, 90, 120 };
+
         public SettingsWindow()
         {
             InitializeComponent();
+
+            var settings = Properties.Settings.Default;
+
             AddressSelect.ItemsSource = addresses;
-            var uprn = Properties.Settings.Default.Uprn;
-            if (!string.IsNullOrEmpty(uprn))
-                Uprn.Text = uprn;
+            NagEvery.ItemsSource = nagIntervalText;
+            NagStart.Culture = CultureInfo.CreateSpecificCulture("en-gb");
+            NagStart.SelectedDateTime = DateTime.Now.Date + settings.NagStartTime;
+
+            var mins = (int)settings.NagInterval.TotalMinutes;
+            NagEvery.SelectedIndex = nagIntervals.IndexOf(mins);
+
+            if (!string.IsNullOrEmpty(settings.Uprn))
+                Uprn.Text = settings.Uprn;
         }
 
         private FalkirkWebClient GetWebClient()
@@ -97,13 +119,21 @@ namespace FalkirkBinAlert
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            UpdateApplicationSettings();
+            DialogResult = true;
+        }
+
+        private void UpdateApplicationSettings()
+        {
             var settings = Properties.Settings.Default;
             var uprn = Uprn.Text.Trim();
             if (Regex.IsMatch(uprn, @"^\d+$"))
                 settings.Uprn = uprn;
             settings.Theme = ThemePicker.ThemeName;
+            if (NagStart.SelectedDateTime.HasValue)
+                settings.NagStartTime = NagStart.SelectedDateTime.Value.TimeOfDay;
+            settings.NagInterval = TimeSpan.FromMinutes(nagIntervals[NagEvery.SelectedIndex]);
             settings.Save();
-            DialogResult = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
