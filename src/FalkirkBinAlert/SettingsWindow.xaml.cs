@@ -41,6 +41,7 @@ namespace FalkirkBinAlert
             NagEvery.ItemsSource = nagIntervalText;
             NagStart.Culture = CultureInfo.CreateSpecificCulture("en-gb");
             NagStart.SelectedDateTime = DateTime.Now.Date + settings.NagStartTime;
+            PlayAudio.IsChecked = settings.PlayNagAudio;
 
             var mins = (int)settings.NagInterval.TotalMinutes;
             NagEvery.SelectedIndex = nagIntervals.IndexOf(mins);
@@ -133,6 +134,8 @@ namespace FalkirkBinAlert
             if (NagStart.SelectedDateTime.HasValue)
                 settings.NagStartTime = NagStart.SelectedDateTime.Value.TimeOfDay;
             settings.NagInterval = TimeSpan.FromMinutes(nagIntervals[NagEvery.SelectedIndex]);
+            settings.PlayNagAudio = PlayAudio.IsChecked.Value;
+
             settings.Save();
         }
 

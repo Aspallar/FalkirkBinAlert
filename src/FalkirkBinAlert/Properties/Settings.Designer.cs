@@ -82,5 +82,17 @@ namespace FalkirkBinAlert.Properties {
                 this["RunningWarningShown"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PlayNagAudio {
+            get {
+                return ((bool)(this["PlayNagAudio"]));
+            }
+            set {
+                this["PlayNagAudio"] = value;
+            }
+        }
     }
 }

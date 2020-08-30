@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Net;
 using Newtonsoft.Json;
 using System.Windows.Threading;
+using System.Media;
+using System.Threading;
 
 namespace FalkirkBinAlert
 {
@@ -101,8 +103,13 @@ namespace FalkirkBinAlert
 
         private void NagTimer_Tick(object sender, EventArgs e)
         {
+            var settings = Properties.Settings.Default;
             nagTimer.Stop();
             var dlg = new NagWindow() { Owner = this };
+
+            if (settings.PlayNagAudio)
+                PlayNagAudio();
+
             dlg.ShowDialog();
             if (dlg.DialogResult.HasValue)
             {
@@ -112,10 +119,20 @@ namespace FalkirkBinAlert
                 }
                 else
                 {
-                    nagTimer.Interval = Properties.Settings.Default.NagInterval;
+                    nagTimer.Interval = settings.NagInterval;
                     nagTimer.Start();
                 }
             }
+        }
+
+        private static void PlayNagAudio()
+        {
+            ThreadPool.QueueUserWorkItem(o =>
+            {
+                using (var stream = Properties.Resources.BinNag)
+                using (var player = new SoundPlayer(stream))
+                    player.PlaySync();
+            });
         }
 
         private void UpdateBins(string binJson)
@@ -165,7 +182,8 @@ namespace FalkirkBinAlert
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SettingsWindow { Owner = this };
-            if ((bool)dlg.ShowDialog())
+            dlg.ShowDialog();
+            if (dlg.DialogResult.HasValue && dlg.DialogResult.Value)
             {
                 FetchBinData();
             }
