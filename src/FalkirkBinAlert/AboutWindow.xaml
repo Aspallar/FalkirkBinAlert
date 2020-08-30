@@ -1,0 +1,32 @@
+﻿<mah:MetroWindow x:Class="FalkirkBinAlert.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:FalkirkBinAlert"
+        mc:Ignorable="d"
+        Title="About"
+        Icon="Bin.ico"
+        Height="205" Width="326"
+        WindowStartupLocation="CenterOwner"
+        ShowMinButton="False" ShowMaxRestoreButton="False"
+        ResizeMode="NoResize">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="wheelie-bin.png" Width="96" Height="96" Margin="0 10"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Falkirk Bins" FontSize="20" Margin="0 12 0 0"/>
+                <TextBlock x:Name="Version" Margin="0 5"/>
+                <TextBlock x:Name="Copyright"/>
+            </StackPanel>
+        </Grid>
+        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                Content="ok" Width="100" HorizontalAlignment="Right"
+                Padding="5" Margin="20 0" FontSize="20" Click="okButton_Click"/>
+    </StackPanel>
+</mah:MetroWindow>

@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Aspallar")]
 [assembly: AssemblyProduct("FalkirkBinAlert")]
-[assembly: AssemblyCopyright("Copyright © Aspallar 2020")]
+[assembly: AssemblyCopyright("Copyright © 2020 David Marshall")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

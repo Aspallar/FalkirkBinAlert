@@ -22,6 +22,7 @@ namespace FalkirkBinAlert
         private DispatcherTimer nagTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private bool running = true;
+        private AboutWindow aboutWindow;
 
         public MainWindow()
         {
@@ -186,6 +187,8 @@ namespace FalkirkBinAlert
 
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
+            if (aboutWindow != null)
+                aboutWindow.Close();
             notifyIcon.Dispose();
         }
 
@@ -199,6 +202,7 @@ namespace FalkirkBinAlert
                 Text = "Falkirk Bins",
             };
 
+            notifyIcon.ContextMenu.MenuItems.Add(new System.Windows.Forms.MenuItem("About...", NotifyIcon_About_Click));
             notifyIcon.ContextMenu.MenuItems.Add(new System.Windows.Forms.MenuItem("Show", NotifyIcon_Click));
             notifyIcon.ContextMenu.MenuItems.Add(new System.Windows.Forms.MenuItem("Exit", NotifyIcon_Exit_Click));
             notifyIcon.Click += NotifyIcon_Click;
@@ -216,6 +220,31 @@ namespace FalkirkBinAlert
             Visibility = Visibility.Visible;
             WindowState = WindowState.Normal;
             Activate();
+        }
+
+        private void NotifyIcon_About_Click(object sender, EventArgs e)
+        {
+            if (aboutWindow != null)
+            {
+                aboutWindow.Activate();
+            }
+            else
+            {
+                aboutWindow = new AboutWindow { Owner = this };
+                aboutWindow.Loaded += AboutWindow_Loaded;
+                aboutWindow.Closed += AboutWindow_Closed;
+                aboutWindow.Show();
+            }
+        }
+
+        private void AboutWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            aboutWindow.Activate();
+        }
+
+        private void AboutWindow_Closed(object sender, EventArgs e)
+        {
+            aboutWindow = null;
         }
     }
 }
