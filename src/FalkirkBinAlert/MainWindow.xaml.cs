@@ -83,6 +83,7 @@ namespace FalkirkBinAlert
                 var nagStart = Properties.Settings.Default.NagStartTime;
                 var now = DateTime.Now.TimeOfDay;
                 var interval = now < nagStart ? nagStart - now : TimeSpan.FromMinutes(2);
+
                 if (nagTimer == null)
                 {
                     nagTimer = new DispatcherTimer();
@@ -102,14 +103,18 @@ namespace FalkirkBinAlert
         {
             nagTimer.Stop();
             var dlg = new NagWindow() { Owner = this };
-            if ((bool)dlg.ShowDialog())
+            dlg.ShowDialog();
+            if (dlg.DialogResult.HasValue)
             {
-                nagTimer = null;
-            }
-            else
-            {
-                nagTimer.Interval = Properties.Settings.Default.NagInterval;
-                nagTimer.Start();
+                if (dlg.DialogResult.Value)
+                {
+                    nagTimer = null;
+                }
+                else
+                {
+                    nagTimer.Interval = Properties.Settings.Default.NagInterval;
+                    nagTimer.Start();
+                }
             }
         }
 
