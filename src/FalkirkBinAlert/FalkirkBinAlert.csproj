@@ -175,7 +175,7 @@
     <Resource Include="wheelie-bin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BinNag.wav" />
+    <None Include="BinNag.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
