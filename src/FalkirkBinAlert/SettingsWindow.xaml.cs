@@ -20,6 +20,7 @@ namespace FalkirkBinAlert
     {
         private FalkirkWebClient client = null;
         private ObservableCollection<UprnAddress> addresses = new ObservableCollection<UprnAddress>();
+        private bool runOnStartup;
 
         private readonly List<string> nagIntervalText = new List<string>
         {
@@ -48,6 +49,10 @@ namespace FalkirkBinAlert
 
             if (!string.IsNullOrEmpty(settings.Uprn))
                 Uprn.Text = settings.Uprn;
+
+            runOnStartup =
+                (RunOnStartupStatus)settings.RunOnStartup == RunOnStartupStatus.RunOnStartup;
+            RunOnStartup.IsChecked = runOnStartup;
         }
 
         private FalkirkWebClient GetWebClient()
@@ -121,6 +126,8 @@ namespace FalkirkBinAlert
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateApplicationSettings();
+            if (RunOnStartup.IsChecked.Value != runOnStartup)
+                AppRegistry.RunOnStartup = RunOnStartup.IsChecked.Value;
             DialogResult = true;
         }
 
@@ -135,6 +142,8 @@ namespace FalkirkBinAlert
                 settings.NagStartTime = NagStart.SelectedDateTime.Value.TimeOfDay;
             settings.NagInterval = TimeSpan.FromMinutes(nagIntervals[NagEvery.SelectedIndex]);
             settings.PlayNagAudio = PlayAudio.IsChecked.Value;
+            settings.RunOnStartup = RunOnStartup.IsChecked.Value ? (int)RunOnStartupStatus.RunOnStartup
+                : (int)RunOnStartupStatus.DontRunOnStartup;
 
             settings.Save();
         }

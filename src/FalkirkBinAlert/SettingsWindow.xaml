@@ -87,13 +87,27 @@
 
             <TextBlock Text="Color Theme" FontSize="20" Margin="0 20 0 10"></TextBlock>
             <local:MetroThemePicker x:Name="ThemePicker"/>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="okButton" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0 20 0 0">
+                    <CheckBox x:Name="RunOnStartup">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.3" ScaleY="1.3" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                    <TextBlock Text="Run Falkirk Bins on Windows startup" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="okButton" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
                         Width="60" Content="OK" Margin="0 20 10 0" Click="OkButton_Click"/>
-                <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                    <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
                         Width="60" Content="Cancel" Margin="0 20 10 0" IsCancel="True" Click="Cancel_Click"/>
-            </StackPanel>
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </mah:MetroWindow>

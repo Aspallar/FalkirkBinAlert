@@ -16,6 +16,13 @@ namespace FalkirkBinAlert
             base.OnStartup(e);
             var settings = FalkirkBinAlert.Properties.Settings.Default;
             ThemeManager.Current.ChangeTheme(this, settings.Theme);
+
+            if ((RunOnStartupStatus)settings.RunOnStartup == RunOnStartupStatus.NotSpecified)
+            {
+                AppRegistry.RunOnStartup = true;
+                settings.RunOnStartup = (int)RunOnStartupStatus.RunOnStartup;
+                settings.Save();
+            }
         }
     }
 }
