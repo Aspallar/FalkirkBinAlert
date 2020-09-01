@@ -80,7 +80,6 @@ namespace FalkirkBinAlert
 
         private void UpdateNagTimer()
         {
-            var settings = Properties.Settings.Default;
             if (binStatus.Any(x => x.WhenDays == 1)) {
                 var nagStart = Properties.Settings.Default.NagStartTime;
                 var now = DateTime.Now.TimeOfDay;
