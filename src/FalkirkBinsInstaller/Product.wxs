@@ -35,8 +35,15 @@
                Event="NewDialog"
                Value="WelcomeDlg"
                Order="2">1</Publish>
+      <Publish Dialog="ExitDialog"
+               Control="Finish"
+               Event="DoAction"
+               Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>      
     </UI>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Falkirk Bins" />
+    <Property Id="WixShellExecTarget" Value="[#FalkirkBinAlert.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />    
 
     <Feature Id="ProductFeature" Title="Falkirk Bins" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
