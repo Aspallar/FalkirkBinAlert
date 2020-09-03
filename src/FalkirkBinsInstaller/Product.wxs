@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  
+
   <?define FalkirkBinAlert_TargetDir=$(var.FalkirkBinAlert.TargetDir)?>
-  
+
   <Product Id="{7B8467D0-875D-4769-B58E-2A1C90B789D4}"
            Name="Falkirk Bins"
            Language="1033" Version="1.0.0.0"
            Manufacturer="Aspallar"
            UpgradeCode="{D39C0684-3AD3-4BEF-9467-8F1E2BE04AE2}">
-    
+
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of Falkirk Bins is already installed." />
@@ -18,6 +18,25 @@
     <Icon Id="AppIcon" SourceFile="$(var.FalkirkBinAlert.ProjectDir)\bin.ico" />
     <Property Id="ARPPRODUCTICON">AppIcon</Property>
     <Property Id="ARPURLINFOABOUT">https://github.com/Aspallar/FalkirkBinAlert</Property>
+
+    <WixVariable Id="WixUIDialogBmp" Value="BlueBin.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+      
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <!-- Skips the license dialog -->
+      <Publish Dialog="WelcomeDlg"
+               Control="Next"
+               Event="NewDialog"
+               Value="InstallDirDlg"
+               Order="2">1</Publish>
+      <Publish Dialog="InstallDirDlg"
+               Control="Back"
+               Event="NewDialog"
+               Value="WelcomeDlg"
+               Order="2">1</Publish>
+    </UI>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 
     <Feature Id="ProductFeature" Title="Falkirk Bins" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
@@ -43,39 +62,39 @@
       <Component Id="FalkirkBinAlert.exe.config" Guid="ba847202-9cd8-4d60-a3cd-230ec3e28ac9">
         <File Id="FalkirkBinAlert.exe.config" Name="FalkirkBinAlert.exe.config" Source="$(var.FalkirkBinAlert_TargetDir)FalkirkBinAlert.exe.config" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="MahApps.Metro.dll" Guid="83cf2ee0-ffb8-4ab0-a7a2-bbf87949ee27">
         <File Id="MahApps.Metro.dll" Name="MahApps.Metro.dll" Source="$(var.FalkirkBinAlert_TargetDir)MahApps.Metro.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="MahApps.Metro.IconPacks.Core.dll" Guid="9a7c5b61-0813-4588-a3a9-171eb5ed3f59">
         <File Id="MahApps.Metro.IconPacks.Core.dll" Name="MahApps.Metro.IconPacks.Core.dll" Source="$(var.FalkirkBinAlert_TargetDir)MahApps.Metro.IconPacks.Core.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="AngleSharp.dll" Guid="ec734b96-7b80-4547-aacc-8136d69b6bd5">
         <File Id="AngleSharp.dll" Name="AngleSharp.dll" Source="$(var.FalkirkBinAlert_TargetDir)AngleSharp.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="MahApps.Metro.IconPacks.MaterialLight.dll" Guid="0151784a-3291-408f-9186-e23e068b3c3a">
         <File Id="MahApps.Metro.IconPacks.MaterialLight.dll" Name="MahApps.Metro.IconPacks.MaterialLight.dll" Source="$(var.FalkirkBinAlert_TargetDir)MahApps.Metro.IconPacks.MaterialLight.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="ControlzEx.dll" Guid="9da8fe0d-64d9-4ca6-87d6-d2490a26b54a">
         <File Id="ControlzEx.dll" Name="ControlzEx.dll" Source="$(var.FalkirkBinAlert_TargetDir)ControlzEx.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="Newtonsoft.Json.dll" Guid="5dce676c-2773-44b6-b43e-21f54ef27a54">
         <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.FalkirkBinAlert_TargetDir)Newtonsoft.Json.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="Microsoft.Xaml.Behaviors.dll" Guid="de13cc84-e2c8-49fa-8f80-d15c47c1b9a8">
         <File Id="Microsoft.Xaml.Behaviors.dll" Name="Microsoft.Xaml.Behaviors.dll" Source="$(var.FalkirkBinAlert_TargetDir)Microsoft.Xaml.Behaviors.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="System.Text.Encoding.CodePages.dll" Guid="435e569a-b846-43de-8f7f-fd5f1b6f9316">
         <File Id="System.Text.Encoding.CodePages.dll" Name="System.Text.Encoding.CodePages.dll" Source="$(var.FalkirkBinAlert_TargetDir)System.Text.Encoding.CodePages.dll" KeyPath="yes" />
       </Component>
-      
+
       <Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="38bd8325-b3b2-40ea-8a94-4d3e118492dc">
         <File Id="System.Runtime.CompilerServices.Unsafe.dll" Name="System.Runtime.CompilerServices.Unsafe.dll" Source="$(var.FalkirkBinAlert_TargetDir)System.Runtime.CompilerServices.Unsafe.dll" KeyPath="yes" />
       </Component>
@@ -99,5 +118,5 @@
     </ComponentGroup>
 
   </Fragment>
- 
+
 </Wix>
