@@ -104,15 +104,17 @@ namespace FalkirkBinAlert
         {
             var settings = Properties.Settings.Default;
             nagTimer.Stop();
-            var dlg = new NagWindow() { Owner = this };
+
+            var pendingBins = binStatus.Where(x => x.WhenDays == 1).OrderBy(x => x.Order).ToList();
+            var nagDlg = new NagWindow(pendingBins) { Owner = this };
 
             if (settings.PlayNagAudio)
                 PlayNagAudio();
 
-            dlg.ShowDialog();
-            if (dlg.DialogResult.HasValue)
+            nagDlg.ShowDialog();
+            if (nagDlg.DialogResult.HasValue)
             {
-                if (dlg.DialogResult.Value)
+                if (nagDlg.DialogResult.Value)
                 {
                     nagTimer = null;
                 }

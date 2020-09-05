@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Documents;
 using MahApps.Metro.Controls;
 
 namespace FalkirkBinAlert
@@ -8,9 +10,10 @@ namespace FalkirkBinAlert
     /// </summary>
     public partial class NagWindow : MetroWindow
     {
-        public NagWindow()
+        public NagWindow(List<BinStatus> pendingBins)
         {
             InitializeComponent();
+            PendingBins.ItemsSource = pendingBins;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

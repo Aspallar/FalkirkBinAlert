@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace FalkirkBinAlert
 {
-    internal class BinStatus
+    public class BinStatus
     {
         private static readonly Dictionary<string, SolidColorBrush> colors = new Dictionary<string, SolidColorBrush>();
 
@@ -31,6 +31,8 @@ namespace FalkirkBinAlert
         public string Day { get; }
 
 
+        public int Order => Title == "Black box" || Title == "Food caddy" ? 2 : 1;
+
         private static int Days(DateTime date)
             => (int)(date - DateTime.Now.Date).TotalDays;
 
@@ -56,6 +58,9 @@ namespace FalkirkBinAlert
             }
             return brush;
         }
+
+        public static int OrderValue(BinStatus bin)
+            => bin.Title == "Black box" || bin.Title == "Food caddy" ? 2 : 1;
 
     }
 }
