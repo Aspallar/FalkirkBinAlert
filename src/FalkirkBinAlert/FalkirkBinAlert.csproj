@@ -110,6 +110,7 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppRegistry.cs" />
+    <Compile Include="BinTitles.cs" />
     <Compile Include="ImageSourceExtensions.cs" />
     <Compile Include="NagWindow.xaml.cs">
       <DependentUpon>NagWindow.xaml</DependentUpon>

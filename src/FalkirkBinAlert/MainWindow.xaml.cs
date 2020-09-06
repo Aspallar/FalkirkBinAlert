@@ -140,14 +140,13 @@ namespace FalkirkBinAlert
 
         private void UpdateBins(string binJson)
         {
-            var binNames = new List<string> { "Green bin", "Blue bin", "Burgundy bin", "Brown bin", "Food caddy", "Black box" };
             var binData = JsonConvert.DeserializeObject<List<BinEntry>>(binJson);
 
             binData = binData.OrderBy(x => x.Start).ToList();
             var status = new List<BinStatus>();
-            foreach (var name in binNames)
+            foreach (var title in BinTitles.AllBinTitles)
             {
-                var entry = binData.Where(x => x.Title == name).FirstOrDefault();
+                var entry = binData.Where(x => x.Title == title).FirstOrDefault();
                 if (entry != null)
                     status.Add(new BinStatus(entry.Title, entry.Color, entry.Start));
             }

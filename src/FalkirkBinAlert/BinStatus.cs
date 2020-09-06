@@ -31,7 +31,7 @@ namespace FalkirkBinAlert
         public string Day { get; }
 
 
-        public int Order => Title == "Black box" || Title == "Food caddy" ? 2 : 1;
+        public int Order => Title == BinTitles.BlackBox || Title == BinTitles.Food ? 2 : 1;
 
         public string InfoUrl
         {
@@ -40,22 +40,22 @@ namespace FalkirkBinAlert
                 var url = "https://www.falkirk.gov.uk/services/bins-rubbish-recycling/household-waste/what-goes-in-my-bins/";
                 switch (Title)
                 {
-                    case "Green bin":
+                    case BinTitles.Green:
                         url += "green-bin.aspx";
                         break;
-                    case "Blue bin":
+                    case BinTitles.Blue:
                         url += "blue-bin.aspx";
                         break;
-                    case "Burgundy bin":
+                    case BinTitles.Burgundy:
                         url += "burgundy-bin.aspx";
                         break;
-                    case "Brown bin":
+                    case BinTitles.Brown:
                         url += "brown-bin.aspx";
                         break;
-                    case "Food caddy":
+                    case BinTitles.Food:
                         url += "food-waste.aspx";
                         break;
-                    case "Black box":
+                    case BinTitles.BlackBox:
                         url += "black-box-textile-bag.aspx";
                         break;
                 }
@@ -88,9 +88,6 @@ namespace FalkirkBinAlert
             }
             return brush;
         }
-
-        public static int OrderValue(BinStatus bin)
-            => bin.Title == "Black box" || bin.Title == "Food caddy" ? 2 : 1;
 
     }
 }
