@@ -38,7 +38,7 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Postcode" VerticalAlignment="Center" Margin="0 0 10 0"/>
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                    <TextBox x:Name="PostCode" Width="100" CharacterCasing="Upper"/>
+                    <TextBox x:Name="PostCode" Width="100" CharacterCasing="Upper" KeyUp="PostCode_KeyUp"/>
                     <Button x:Name="PostcodeFind" Click="PostcodeFind_Click" ToolTip="Find Postcode">
                         <iconPacks:PackIconMaterialLight Kind="Magnify" />
                     </Button>

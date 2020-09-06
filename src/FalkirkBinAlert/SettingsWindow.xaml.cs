@@ -94,6 +94,11 @@ namespace FalkirkBinAlert
 
         private void PostcodeFind_Click(object sender, RoutedEventArgs e)
         {
+            FindPostcode();
+        }
+
+        private void FindPostcode()
+        {
             PostcodeError.Text = "";
 
             var postcode = PostCode.Text.Trim();
@@ -153,6 +158,15 @@ namespace FalkirkBinAlert
             var settings = Properties.Settings.Default;
             if (settings.Theme != ThemePicker.ThemeName)
                 ThemeManager.Current.ChangeTheme(Application.Current, settings.Theme);
+        }
+
+        private void PostCode_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                e.Handled = true;
+                FindPostcode();
+            }
         }
     }
 }
