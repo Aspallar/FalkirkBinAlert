@@ -33,6 +33,36 @@ namespace FalkirkBinAlert
 
         public int Order => Title == "Black box" || Title == "Food caddy" ? 2 : 1;
 
+        public string InfoUrl
+        {
+            get
+            {
+                var url = "https://www.falkirk.gov.uk/services/bins-rubbish-recycling/household-waste/what-goes-in-my-bins/";
+                switch (Title)
+                {
+                    case "Green bin":
+                        url += "green-bin.aspx";
+                        break;
+                    case "Blue bin":
+                        url += "blue-bin.aspx";
+                        break;
+                    case "Burgundy bin":
+                        url += "burgundy-bin.aspx";
+                        break;
+                    case "Brown bin":
+                        url += "brown-bin.aspx";
+                        break;
+                    case "Food caddy":
+                        url += "food-waste.aspx";
+                        break;
+                    case "Black box":
+                        url += "black-box-textile-bag.aspx";
+                        break;
+                }
+                return url;
+            }
+        }
+
         private static int Days(DateTime date)
             => (int)(date - DateTime.Now.Date).TotalDays;
 

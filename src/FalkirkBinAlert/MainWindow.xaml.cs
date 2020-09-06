@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System.Windows.Threading;
 using System.Media;
 using System.Threading;
+using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace FalkirkBinAlert
 {
@@ -269,6 +271,13 @@ namespace FalkirkBinAlert
         private void AboutWindow_Closed(object sender, EventArgs e)
         {
             aboutWindow = null;
+        }
+
+        private void BinButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var bin = (BinStatus)button.DataContext;
+            Process.Start(bin.InfoUrl);
         }
     }
 }

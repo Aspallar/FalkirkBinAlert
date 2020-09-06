@@ -36,8 +36,16 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" Width="100" Height="40" Fill="{Binding Color}" RadiusX="5" RadiusY="5"/>
-                                    <TextBlock Grid.Column="0" Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                    <Button Grid.Column="0" Cursor="Hand" Click="BinButton_Click">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Grid>
+                                                    <Rectangle Width="100" Height="40" Fill="{Binding Color}" RadiusX="5" RadiusY="5"/>
+                                                    <TextBlock Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
                                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
                                         <TextBlock Text="{Binding When}" />
                                         <TextBlock Text="{Binding Day}" FontStyle="Italic"/>
