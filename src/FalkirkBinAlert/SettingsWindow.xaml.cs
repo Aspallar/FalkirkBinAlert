@@ -21,6 +21,7 @@ namespace FalkirkBinAlert
         private FalkirkWebClient client = null;
         private ObservableCollection<UprnAddress> addresses = new ObservableCollection<UprnAddress>();
         private bool runOnStartup;
+        private bool postcodeLookupInProgress = false;
 
         private readonly List<string> nagIntervalText = new List<string>
         {
@@ -82,6 +83,7 @@ namespace FalkirkBinAlert
             {
                 PostcodeError.Text = "Postcode not found.";
             }
+            postcodeLookupInProgress = false;
         }
 
         private static IHtmlCollection<IElement> GetAddressOptions(string response)
@@ -99,11 +101,15 @@ namespace FalkirkBinAlert
 
         private void FindPostcode()
         {
+            if (postcodeLookupInProgress)
+                return;
+
             PostcodeError.Text = "";
 
             var postcode = PostCode.Text.Trim();
             if (postcode.Length > 0)
             {
+                postcodeLookupInProgress = true;
                 addresses.Clear();
                 var client = GetWebClient();
                 client.FetchAddressPageAsync(PostCode.Text);
