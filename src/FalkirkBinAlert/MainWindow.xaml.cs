@@ -242,9 +242,16 @@ namespace FalkirkBinAlert
 
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
-            Visibility = Visibility.Visible;
-            WindowState = WindowState.Normal;
-            Activate();
+            if (Visibility == Visibility.Hidden)
+            {
+                Visibility = Visibility.Visible;
+                WindowState = WindowState.Normal;
+                Activate();
+            }
+            else
+            {
+                Visibility = Visibility.Hidden;
+            }
         }
 
         private void NotifyIcon_About_Click(object sender, EventArgs e)
