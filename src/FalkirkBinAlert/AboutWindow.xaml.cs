@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,6 +36,11 @@ namespace FalkirkBinAlert
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Website_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Aspallar/FalkirkBinAlert");
         }
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="About"
         Icon="Bin.ico"
-        Height="205" Width="326"
+        Height="200" Width="326"
         WindowStartupLocation="CenterOwner"
         ShowMinButton="False" ShowMaxRestoreButton="False"
         ResizeMode="NoResize">
@@ -22,11 +22,18 @@
             <StackPanel Grid.Column="1">
                 <TextBlock Text="Falkirk Bins" FontSize="20" Margin="0 12 0 0"/>
                 <TextBlock x:Name="Version" Margin="0 5"/>
-                <TextBlock x:Name="Copyright"/>
+                <TextBlock x:Name="Copyright" Margin="0 0 0 6"/>
+                <Button Cursor="Hand" Click="Website_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <TextBlock Text="Falkirk Bins Web Site" TextDecorations="Underline" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
         </Grid>
         <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                Content="ok" Width="100" HorizontalAlignment="Right"
-                Padding="5" Margin="20 0" FontSize="20" Click="okButton_Click"/>
+                Content="ok" Width="80" HorizontalAlignment="Right"
+                Padding="5" Margin="20 0" FontSize="16" Click="okButton_Click"/>
     </StackPanel>
 </mah:MetroWindow>
