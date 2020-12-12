@@ -60,7 +60,7 @@
         <StackPanel x:Name="NetworkError" Visibility="Hidden">
             <Border BorderThickness="1" BorderBrush="Red" Margin="10" CornerRadius="10">
                 <TextBlock  TextWrapping="Wrap" Foreground="Red" Margin="10" FontSize="20" TextDecorations="underline">
-                        Uable to obtain bin data from Falkirk Council.
+                    Uable to obtain bin data from Falkirk Council.
                 </TextBlock>
             </Border>
             <TextBlock TextWrapping="Wrap" Margin="10" FontSize="16">
@@ -81,5 +81,26 @@
             </TextBlock>
             <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 40 0 0"/>
         </StackPanel>
+        <StackPanel x:Name="NoBinSchedule" Visibility="Hidden">
+            <StackPanel.Resources>
+                <Thickness x:Key="TextMargh" Top="5" Bottom="5" Left="20" Right="20"/>
+            </StackPanel.Resources>
+            <Border BorderThickness="1" BorderBrush="Red" Margin="10" CornerRadius="10" Padding="0 10">
+                <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Red" FontSize="20" FontWeight="Bold">
+                    NO SCHEDULE
+                </TextBlock>
+            </Border>
+            <TextBlock TextWrapping="Wrap" Margin="{StaticResource TextMargh}">
+                No bin schedule was found for the current location.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="{StaticResource TextMargh}">
+                Locations that are not residential addresses sun as businesses will not have a bin schedule.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="{StaticResource TextMargh}">
+                Click on the cog icon in the title bar to change the location.
+            </TextBlock>
+            <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 40 0 0"/>
+        </StackPanel>
+        <mah:ProgressRing x:Name="BusyIndicator" IsActive="False" />
     </Grid>
 </mah:MetroWindow>

@@ -50,6 +50,9 @@ namespace FalkirkBinAlert
             else
             {
                 NoLocation.Visibility = Visibility.Hidden;
+                NoBinSchedule.Visibility = Visibility.Hidden;
+                BusyIndicator.IsActive = true;
+                binStatus.Clear();
                 refreshTimer.Stop();
                 var start = DateTime.Now.Date;
                 var end = start.AddDays(90);
@@ -63,6 +66,7 @@ namespace FalkirkBinAlert
         {
             client.Dispose();
             client = null;
+            BusyIndicator.IsActive = false;
 
             if (!e.Cancelled && e.Error == null)
             {
@@ -154,6 +158,11 @@ namespace FalkirkBinAlert
 
             foreach (var bin in status.OrderBy(x => x.Date))
                 binStatus.Add(bin);
+
+            if (binStatus.Count == 0)
+                NoBinSchedule.Visibility = Visibility.Visible;
+            else
+                NoBinSchedule.Visibility = Visibility.Hidden;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
