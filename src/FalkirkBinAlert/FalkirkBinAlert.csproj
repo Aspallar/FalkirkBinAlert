@@ -114,6 +114,9 @@
       <DependentUpon>BasicClock.xaml</DependentUpon>
     </Compile>
     <Compile Include="BinTitles.cs" />
+    <Compile Include="ErrorHeader.xaml.cs">
+      <DependentUpon>ErrorHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageSourceExtensions.cs" />
     <Compile Include="NagWindow.xaml.cs">
       <DependentUpon>NagWindow.xaml</DependentUpon>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BasicClock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ErrorHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

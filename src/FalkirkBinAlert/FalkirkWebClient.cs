@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Web;
 
@@ -31,11 +32,21 @@ namespace FalkirkBinAlert
             DownloadStringAsync(new Uri(url, UriKind.Relative));
         }
 
+        private string UserAgent
+        {
+            get
+            {
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                var versionString = $"{version.Major}.{version.Minor}.{version.Build}";
+                return $"FalkirkBinAlert/{versionString} (https://github.com/Aspallar/FalkirkBinAlert)";
+            }
+        }
+
         protected override WebRequest GetWebRequest(Uri address)
         {
             var request = (HttpWebRequest) base.GetWebRequest(address);
             request.AllowAutoRedirect = false;
-            request.UserAgent = "FalkirkBinAlert/1";
+            request.UserAgent = UserAgent;
             return request;
         }
     }
