@@ -16,6 +16,8 @@
         Closing="MetroWindow_Closing"
         Closed="MetroWindow_Closed">
     <Window.Resources>
+        <local:HtmlColorToBrushConverter x:Key="HtmlColorToBrushConverter" />
+        <local:DaysToStringConverter x:Key="DaysToStringConverter" />
         <Style x:Key="Paragraph" TargetType="TextBlock">
             <Setter Property="Margin" Value="20 5 20 5"/>
             <Setter Property="FontSize" Value="14"/>
@@ -24,14 +26,20 @@
     </Window.Resources>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <Button x:Name="About"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="About..."
+                    Click="About_Click">
+                <iconPacks:PackIconMaterialLight Kind="Eye" />
+            </Button>
             <Button x:Name="Settings"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Settings"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Settings..."
                     Click="Settings_Click">
                 <iconPacks:PackIconMaterialLight Kind="Cog" />
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
     <Grid>
+        <!--Bin status display -->
         <Border Margin="10 4">
             <Viewbox Stretch="Uniform">
                 <ItemsControl x:Name="BinStatusList" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -47,15 +55,15 @@
                                         <Button.Template>
                                             <ControlTemplate>
                                                 <Grid>
-                                                    <Rectangle Width="100" Height="40" Fill="{Binding Color}" RadiusX="5" RadiusY="5"/>
+                                                    <Rectangle Width="100" Height="40" Fill="{Binding Color, Converter={StaticResource HtmlColorToBrushConverter}}" RadiusX="5" RadiusY="5"/>
                                                     <TextBlock Text="{Binding Title}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Button.Template>
                                     </Button>
                                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10 0 0 0">
-                                        <TextBlock Text="{Binding When}" />
-                                        <TextBlock Text="{Binding Day}" FontStyle="Italic"/>
+                                        <TextBlock Text="{Binding DaysToCollection, Converter={StaticResource DaysToStringConverter}}" />
+                                        <TextBlock Text="{Binding Date, StringFormat=ddd}" FontStyle="Italic"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -65,6 +73,7 @@
             </Viewbox>
         </Border>
 
+        <!--Network error nessage -->
         <StackPanel x:Name="NetworkError" Visibility="Hidden">
             <local:ErrorHeader Content="Uable to obtain bin data from Falkirk Council." />
             <TextBlock Style="{StaticResource Paragraph}">
@@ -75,6 +84,7 @@
             </TextBlock>
         </StackPanel>
         
+        <!-- no location set error message -->
         <StackPanel x:Name="NoLocation" Visibility="Hidden">
             <local:ErrorHeader Content="Where are you?" />
             <TextBlock Style="{StaticResource Paragraph}">
@@ -83,6 +93,7 @@
             <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 40 0 0"/>
         </StackPanel>
         
+        <!-- No schedulr for current location error message -->
         <StackPanel x:Name="NoBinSchedule" Visibility="Hidden">
             <local:ErrorHeader Content="NO SCHEDULE"/>
             <TextBlock Style="{StaticResource Paragraph}">
@@ -97,6 +108,7 @@
             <Image Source="wheelie-bin.png" Width="96" Height="96" Margin="0 40 0 0"/>
         </StackPanel>
         
+        <!--busy indicator-->
         <mah:ProgressRing x:Name="BusyIndicator" IsActive="False" />
     </Grid>
 </mah:MetroWindow>

@@ -8,8 +8,6 @@ namespace FalkirkBinAlert
 {
     public class FalkirkWebClient : WebClient
     {
-        private const string dateFormat = "yyyy-MM-dd";
-
         public FalkirkWebClient() : base()
         {
             Encoding = Encoding.UTF8;
@@ -18,9 +16,8 @@ namespace FalkirkBinAlert
 
         public void FetchCalendarDataAsync(string uprn, DateTime start, DateTime end)
         {
-
-            var startParam = start.ToString(dateFormat);
-            var endParam = end.ToString(dateFormat);
+            var startParam = QueryDate(start);
+            var endParam = QueryDate(end);
             var uri = new Uri($"bin-calendar?uprn={uprn}&start={startParam}&end={endParam}", UriKind.Relative);
             DownloadStringAsync(uri);
         }
@@ -31,6 +28,8 @@ namespace FalkirkBinAlert
                 + HttpUtility.UrlEncode(postCode);
             DownloadStringAsync(new Uri(url, UriKind.Relative));
         }
+
+        private string QueryDate(DateTime date) => date.ToString("yyyy-MM-dd");
 
         private string UserAgent
         {

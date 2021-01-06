@@ -6,30 +6,21 @@ namespace FalkirkBinAlert
 {
     public class BinStatus
     {
-        private static readonly Dictionary<string, SolidColorBrush> colors = new Dictionary<string, SolidColorBrush>();
-
         public BinStatus(string title, string colorCode, DateTime date)
         {
             Title = title;
-            Color = Brush(colorCode);
+            Color = colorCode;
             Date = date;
-            WhenDays = Days(date);
-            When = when(WhenDays);
-            Day = date.ToString("ddd");
+            DaysToCollection = DaysFronNow(Date);
         }
 
         public string Title { get; }
 
-        public SolidColorBrush Color { get; }
+        public string Color { get; }
 
         public DateTime Date { get; }
 
-        public int WhenDays { get; }
-
-        public string When { get; }
-
-        public string Day { get; }
-
+        public int DaysToCollection { get; }
 
         public int Order => Title == BinTitles.BlackBox || Title == BinTitles.Food ? 2 : 1;
 
@@ -63,31 +54,7 @@ namespace FalkirkBinAlert
             }
         }
 
-        private static int Days(DateTime date)
+        private static int DaysFronNow(DateTime date)
             => (int)(date - DateTime.Now.Date).TotalDays;
-
-        private static string when(int days)
-        {
-            string when;
-            if (days == 0)
-                when = "Today";
-            else if (days == 1)
-                when = "Tomorrow";
-            else
-                when = $"{days} days";
-
-            return when;
-        }
-
-        private static SolidColorBrush Brush(string colorCode)
-        {
-            if (!colors.TryGetValue(colorCode, out SolidColorBrush brush))
-            {
-                brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorCode));
-                colors.Add(colorCode, brush);
-            }
-            return brush;
-        }
-
     }
 }

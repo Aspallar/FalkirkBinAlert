@@ -114,9 +114,12 @@
       <DependentUpon>BasicClock.xaml</DependentUpon>
     </Compile>
     <Compile Include="BinTitles.cs" />
+    <Compile Include="DaysToStringConverter.cs" />
+    <Compile Include="DisplayStatus.cs" />
     <Compile Include="ErrorHeader.xaml.cs">
       <DependentUpon>ErrorHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HtmlColorToBrushConverter.cs" />
     <Compile Include="ImageSourceExtensions.cs" />
     <Compile Include="NagWindow.xaml.cs">
       <DependentUpon>NagWindow.xaml</DependentUpon>
