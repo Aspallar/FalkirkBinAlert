@@ -6,20 +6,39 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:FalkirkBinAlert"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Falkirk Bins Settings"
         Icon="bin.ico"
-        Height="473" Width="522"
+        SizeToContent="Height"
+        Width="622"
         ShowMaxRestoreButton="False" ShowMinButton="False"
         WindowStartupLocation="CenterOwner"
         Unloaded="MetroWindow_Unloaded">
+    <Window.Resources>
+        <system:Double x:Key="SettingsFontSize">18</system:Double>
+        <system:Double x:Key="SettingsLargerFontSize">22</system:Double>
+        <system:Double x:Key="SettingsLargeFontSize">26</system:Double>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{StaticResource SettingsFontSize}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="{StaticResource SettingsFontSize}"/>
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="FontSize" Value="{StaticResource SettingsFontSize}"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.Square.Accent}">
+            <Setter Property="FontSize" Value="{StaticResource SettingsFontSize}"/>
+        </Style>
+    </Window.Resources>
     <Grid Margin="10">
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Location UPRN" Height="30" />
                 <TextBlock x:Name="Uprn" Height="30" Text=""
                            Foreground="Magenta"
-                           Margin="20 0 0 10" FontSize="24" />
+                           Margin="20 0 0 10" FontSize="{StaticResource SettingsLargeFontSize}" />
             </StackPanel>
             <TextBlock TextWrapping="Wrap" Margin="0 0 0 20" >
                 Your location is specified using the Unique Property Reference Number (UPRN).
@@ -57,7 +76,7 @@
                 </ComboBox>
             </Grid>
 
-            <TextBlock Text="Nagging" FontSize="20" Margin="0 20 0 10"></TextBlock>
+            <TextBlock Text="Nagging" FontSize="{StaticResource SettingsLargerFontSize}" Margin="0 20 0 10"></TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -70,7 +89,9 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Start nagging at" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                <mah:TimePicker x:Name="NagStart" Grid.Column="1" Width="120" SelectedTimeFormat="Short"/>
+                <mah:TimePicker x:Name="NagStart" Grid.Column="1" Width="120"
+                                SelectedTimeFormat="Short"
+                                FontSize="{StaticResource SettingsFontSize}"/>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <CheckBox x:Name="PlayAudio" Margin="40 0 0 0">
@@ -85,8 +106,8 @@
                 <ComboBox x:Name="NagEvery" Grid.Column="1" Grid.Row="1" Margin="0 10 0 0"/>
             </Grid>
 
-            <TextBlock Text="Color Theme" FontSize="20" Margin="0 20 0 10"></TextBlock>
-            <local:MetroThemePicker x:Name="ThemePicker"/>
+            <TextBlock Text="Color Theme" FontSize="{StaticResource SettingsLargerFontSize}" Margin="0 20 0 10"></TextBlock>
+            <local:MetroThemePicker x:Name="ThemePicker" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -102,10 +123,8 @@
                     <TextBlock Text="Run Falkirk Bins on Windows startup" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="okButton" Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                        Width="60" Content="OK" Margin="0 20 10 0" Click="OkButton_Click"/>
-                    <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                        Width="60" Content="Cancel" Margin="0 20 10 0" IsCancel="True" Click="Cancel_Click"/>
+                    <Button x:Name="okButton" Width="60" Content="OK" Margin="0 20 10 0" Click="OkButton_Click"/>
+                    <Button Width="60" Content="Cancel" Margin="0 20 10 0" IsCancel="True" Click="Cancel_Click"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
