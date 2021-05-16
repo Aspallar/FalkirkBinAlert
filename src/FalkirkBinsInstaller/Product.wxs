@@ -3,9 +3,9 @@
 
   <?define FalkirkBinAlert_TargetDir=$(var.FalkirkBinAlert.TargetDir)?>
 
-  <Product Id="{19AEA725-E38B-4EA6-A651-5512CA9F1F37}"
+  <Product Id="{D97876A6-707B-4C7D-8FEA-91A752B44427}"
            Name="Falkirk Bins"
-           Language="1033" Version="1.2.0.0"
+           Language="1033" Version="1.3.0.0"
            Manufacturer="Aspallar"
            UpgradeCode="{D39C0684-3AD3-4BEF-9467-8F1E2BE04AE2}">
 
