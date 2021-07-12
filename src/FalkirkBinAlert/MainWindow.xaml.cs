@@ -11,6 +11,7 @@ using System.Media;
 using System.Threading;
 using System.Windows.Controls;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace FalkirkBinAlert
 {
@@ -32,6 +33,20 @@ namespace FalkirkBinAlert
             InitializeComponent();
             BinStatusList.ItemsSource = binStatus;
             refreshTimer.Tick += RefreshTimer_Tick;
+        }
+
+        private void PowerChanged(object s, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    FetchBinData();
+                    break;
+                case PowerModes.Suspend:
+                    refreshTimer?.Stop();
+                    nagTimer?.Stop();
+                    break;
+            }
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -166,6 +181,7 @@ namespace FalkirkBinAlert
         {
             InitializeNotifyIcon();
             FetchBinData();
+            SystemEvents.PowerModeChanged += PowerChanged;
             if (!string.IsNullOrEmpty(Properties.Settings.Default.Uprn))
                 Visibility = Visibility.Hidden;
         }
